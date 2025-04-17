@@ -5,6 +5,8 @@ const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const Pusher = require("pusher");
 
+const port = process.env.PORT || 4000;
+
 const app = express();
 const router = express.Router();
 
@@ -52,4 +54,8 @@ router.post("/hello", (req, res) => {
 });
 
 app.use("/.netlify/functions/api", router);
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
+
 module.exports.handler = serverless(app);
